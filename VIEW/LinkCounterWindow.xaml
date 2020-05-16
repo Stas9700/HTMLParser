@@ -1,0 +1,41 @@
+﻿<Window x:Class="HTML_Parser.VIEW.LinkCounterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HTML_Parser.VIEW"
+        mc:Ignorable="d"
+        Title="LinkCounterWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        
+        <!--Список всех URl-->
+        <TextBlock Text="Список адресов" />
+        <DataGrid ItemsSource="{Binding URLCollection}" Grid.Row="1" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="URL адрес ресурса" Width="80*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding URL}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Кол-во ссылок" Binding="{Binding LinkCount}" Width="20*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!--Панель настроек программы-->
+        <TextBlock Text="Настройка праметров" Grid.Column="1"/>
+        
+    </Grid>
+</Window>
