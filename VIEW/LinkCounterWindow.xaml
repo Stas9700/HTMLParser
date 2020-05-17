@@ -36,6 +36,12 @@
         
         <!--Панель настроек программы-->
         <TextBlock Text="Настройка праметров" Grid.Column="1"/>
-        
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button>
+                <TextBlock Text="Выбрать файл"/>
+            </Button>
+            <RadioButton Content="Простой поиск" GroupName="SearchType"/>
+            <RadioButton Content="Поиск через регулярные выражения" GroupName="SearchType"/>
+        </StackPanel>
     </Grid>
 </Window>
