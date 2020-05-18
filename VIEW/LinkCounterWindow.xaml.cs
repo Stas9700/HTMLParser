@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HTML_Parser.VIEWMODEL;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,7 @@ namespace HTML_Parser.VIEW
         public LinkCounterWindow()
         {
             InitializeComponent();
+            DataContext = new LinkCounterWindowViewModel();
         }
     }
 }
