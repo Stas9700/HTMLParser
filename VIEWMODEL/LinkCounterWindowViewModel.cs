@@ -9,6 +9,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -182,7 +183,7 @@ namespace HTML_Parser.VIEWMODEL
                 try
                 {
                 if (SimpleFind) _сountSimpleAsync(Token.Token);
-                else if (RegexFind) return;
+                else if (RegexFind) _countRegexAsync(Token.Token);
                 }
                 catch (Exception e)
                 {
@@ -193,6 +194,7 @@ namespace HTML_Parser.VIEWMODEL
         {
             URL_All = Pages.Count;
             URL_Counter = 0;
+            MessageBox.Show("1");
                 await Task.Run(() =>
                 {
                     foreach (var item in Pages)
@@ -210,6 +212,35 @@ namespace HTML_Parser.VIEWMODEL
                         }));
                     }
                 });
+            Token = null;
+        }
+
+        private async void _countRegexAsync(CancellationToken ct)
+        {
+            URL_All = Pages.Count;
+            URL_Counter = 0;
+            await Task.Run(() =>
+            {
+                foreach (var item in Pages)
+                {
+                    if (ct.IsCancellationRequested)
+                    { Token = null; break; }
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(item.URL);
+                    var text = request.GetResponse();
+                    string s = new StreamReader(text.GetResponseStream(), Encoding.UTF8).ReadToEnd();
+                    //Regex regex = new Regex("(<a\\shref=\"([^\"]+)\"([^<>]*)>(<\\w>)*([^<>]*)<)");
+                    //Regex regex = new Regex("(<a\\shref=\"\\w+\".+</a>)");
+                    //Regex regex = new Regex("<a\\s.*?>");
+                    //Regex regex = new Regex("<a\\s");
+                    Regex regex = new Regex("<a\\s.*?href=\".*?\".*?>");
+                    var matches = regex.Matches(s).Count;
+                    _this_dispatcher.Invoke(new Action(() =>
+                    {
+                        URL_Counter++;
+                        item.Count = matches;
+                    }));
+                }
+            });
             Token = null;
         }
         #endregion
