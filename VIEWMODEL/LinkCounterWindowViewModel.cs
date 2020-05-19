@@ -39,6 +39,8 @@ namespace HTML_Parser.VIEWMODEL
             } 
         }
         private string _buttonText = "Посчитать";
+        private bool _simpleFind;
+        private bool _regexFind;
         #endregion
 
         #region Properties
@@ -83,6 +85,25 @@ namespace HTML_Parser.VIEWMODEL
             set
             {
                 _buttonText = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool SimpleFind
+        {
+            get => _simpleFind;
+            set
+            {
+                _simpleFind = value;
+                MessageBox.Show(_simpleFind.ToString());
+                OnPropertyChanged();
+            }
+        }
+        public bool RegexFind
+        {
+            get => _regexFind;
+            set
+            {
+                _regexFind = value;
                 OnPropertyChanged();
             }
         }
@@ -155,20 +176,20 @@ namespace HTML_Parser.VIEWMODEL
             });
    
         }
-
-        private async void _count()
+        private void _count()
         {
             Token = new CancellationTokenSource();
                 try
                 {
-                    _сountAsync(Token.Token);
+                if (SimpleFind) _сountSimpleAsync(Token.Token);
+                else if (RegexFind) return;
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                 }
         }
-        private async void _сountAsync(CancellationToken ct)
+        private async void _сountSimpleAsync(CancellationToken ct)
         {
             URL_All = Pages.Count;
             URL_Counter = 0;

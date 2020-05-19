@@ -56,9 +56,9 @@
                     </StackPanel>
                 </Button>-->
             </WrapPanel>
-           
-            <RadioButton Content="Простой поиск" GroupName="SearchType"/>
-            <RadioButton Content="Поиск через регулярные выражения" GroupName="SearchType"/>
+
+            <RadioButton Content="Простой поиск" GroupName="SearchType" IsChecked="{Binding SimpleFind, UpdateSourceTrigger=PropertyChanged}"/>
+            <RadioButton Content="Поиск через регулярные выражения" GroupName="SearchType" IsChecked="{Binding RegexFind, UpdateSourceTrigger=PropertyChanged}"/>
 
             <ProgressBar Visibility="Visible" Margin="10" Width="50" Height="50" Style="{StaticResource MaterialDesignCircularProgressBar}" x:Name="DeterminateCircularProgress" Minimum="0" Maximum="{Binding URL_All ,UpdateSourceTrigger=PropertyChanged}" Value="{Binding URL_Counter ,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
