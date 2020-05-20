@@ -95,7 +95,6 @@ namespace HTML_Parser.VIEWMODEL
             set
             {
                 _simpleFind = value;
-                MessageBox.Show(_simpleFind.ToString());
                 OnPropertyChanged();
             }
         }
@@ -194,7 +193,6 @@ namespace HTML_Parser.VIEWMODEL
         {
             URL_All = Pages.Count;
             URL_Counter = 0;
-            MessageBox.Show("1");
                 await Task.Run(() =>
                 {
                     foreach (var item in Pages)
