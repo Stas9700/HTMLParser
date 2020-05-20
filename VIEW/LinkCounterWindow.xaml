@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:HTML_Parser.VIEW"
         mc:Ignorable="d"
-        Title="LinkCounterWindow" Height="450" Width="800">
+        Title="Подсчет ссылок" Height="450" Width="800">
     <Grid Background="#FF303030">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70*"/>
@@ -27,7 +27,7 @@
                 <DataGridTemplateColumn Header="URL адрес ресурса" Width="75*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding URL}" TextWrapping="Wrap" Foreground="Yellow"/>
+                            <TextBlock Text="{Binding URL}" TextWrapping="Wrap" Style="{DynamicResource SimpleTextBox}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -57,8 +57,8 @@
                 </Button>-->
             </WrapPanel>
 
-            <RadioButton Content="Простой поиск" GroupName="SearchType" IsChecked="{Binding SimpleFind, UpdateSourceTrigger=PropertyChanged}"/>
-            <RadioButton Content="Поиск через регулярные выражения" GroupName="SearchType" IsChecked="{Binding RegexFind, UpdateSourceTrigger=PropertyChanged}"/>
+            <RadioButton Content="Простой поиск" GroupName="SearchType" IsChecked="{Binding SimpleFind, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource MyRadioButton}"/>
+            <RadioButton Content="Поиск через регулярные выражения" GroupName="SearchType" IsChecked="{Binding RegexFind, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource MyRadioButton}"/>
 
             <ProgressBar Visibility="Visible" Margin="10" Width="50" Height="50" Style="{StaticResource MaterialDesignCircularProgressBar}" x:Name="DeterminateCircularProgress" Minimum="0" Maximum="{Binding URL_All ,UpdateSourceTrigger=PropertyChanged}" Value="{Binding URL_Counter ,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
